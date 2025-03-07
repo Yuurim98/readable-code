@@ -2,6 +2,8 @@ package cleancode.minesweeper.tobe.io;
 
 import cleancode.minesweeper.tobe.GameBoard;
 import cleancode.minesweeper.tobe.GameException;
+import java.util.List;
+import java.util.stream.IntStream;
 
 public class ConsoleOutputHandler {
 
@@ -14,10 +16,12 @@ public class ConsoleOutputHandler {
     }
 
     public void showBoard(GameBoard board) {
+        String alphabets = generateColAlphabets(board);
 
-        System.out.println("   a b c d e f g h i j");
+        System.out.println("    " + alphabets);
+
         for (int row = 0; row < board.getRowSize(); row++) {
-            System.out.printf("%d  ", row + 1);
+            System.out.printf("%2d  ", row + 1);
             for (int col = 0; col < board.getColSize(); col++) {
                 System.out.print(
                     board.getSign(row, col) + " "); // board를 그리기 위해서 getter를 통해 cell에서 sign을 가져온다
@@ -25,6 +29,14 @@ public class ConsoleOutputHandler {
             System.out.println();
         }
         System.out.println();
+    }
+
+    private String generateColAlphabets(GameBoard board) {
+        List<String> alphabets = IntStream.range(0, board.getColSize())
+            .mapToObj(index -> (char) ('a' + index))
+            .map(Object::toString)
+            .toList();
+        return String.join(" ", alphabets);
     }
 
     public void printGameWinningComment() {
