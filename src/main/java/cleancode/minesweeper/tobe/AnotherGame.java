@@ -1,6 +1,8 @@
 package cleancode.minesweeper.tobe;
 
-public class AnotherGame implements GameRunnable{
+import cleancode.minesweeper.tobe.game.GameRunnable;
+
+public class AnotherGame implements GameRunnable {
 
     @Override
     public void run() {
